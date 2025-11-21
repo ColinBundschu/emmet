@@ -550,7 +550,7 @@ class AtomTrajectory(AtomRelaxTrajectory, _MDMixin):
             "x": float,
             "y": float,
             "z": float,
-            "element": Element,
+            "element": lambda x: Element(x).Z,
             "id": int,
             "mass": float,
             "timestep": float,
@@ -631,7 +631,7 @@ class AtomTrajectory(AtomRelaxTrajectory, _MDMixin):
                         break
 
         return AtomTrajectory(
-            elements=[ele.Z for ele in meta["atoms"]["element"][0]],
+            elements=meta["atoms"]["element"][0],
             cart_coords=[
                 [
                     [meta["atoms"][k][i][j] for k in ("x", "y", "z")]
